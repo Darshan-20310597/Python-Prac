@@ -1,0 +1,1213 @@
+#! C:/Program Files/Nuke12.2v4/nuke-12.2.4.dll -nx
+version 12.2 v4
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1917" h="991" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1254" stretch="1"/>
+            <splitter orientation="2">
+                <split size="557"/>
+                <dock id="" activePageId="Viewer.2">
+                    <page id="Viewer.2"/>
+                    <page id="Viewer.3"/>
+                    <page id="Viewer.4"/>
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="392"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name C:/Users/Darshan/Desktop/Gaming/Nuke/MRF_Updated.nk
+ frame 49
+ first_frame 46
+ last_frame 50
+ lock_range true
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ xpos -743
+ ypos -528
+ bdwidth 902
+ bdheight 417
+}
+BackdropNode {
+ inputs 0
+ name ICM_and_likehood_for_46_to_50
+ tile_color 0xd887bff
+ gl_color 0xccb2ff
+ xpos -2316
+ ypos -523
+ bdwidth 530
+ bdheight 351
+}
+BackdropNode {
+ inputs 0
+ name MRD_for_3D_MRF_46_to_1
+ tile_color 0xb6f88ff
+ note_font_color 0x70a667ff
+ xpos -1765
+ ypos -964
+ bdwidth 426
+ bdheight 391
+}
+BackdropNode {
+ inputs 0
+ name MRD_for_3D_MRF_46_to_50
+ tile_color 0xb6f88ff
+ note_font_color 0x70a667ff
+ xpos -1753
+ ypos -521
+ bdwidth 426
+ bdheight 391
+}
+BackdropNode {
+ inputs 0
+ name MRD_for_3D_MRF_46_to_50_2
+ tile_color 0xb6f88ff
+ note_font_color 0x70a667ff
+ xpos -1746
+ ypos -100
+ bdwidth 426
+ bdheight 391
+}
+BackdropNode {
+ inputs 0
+ name MRD_for_3D_MRF_46_to_50_Lamdak_10
+ tile_color 0xb6f88ff
+ note_font_color 0x70a667ff
+ xpos -1750
+ ypos 326
+ bdwidth 426
+ bdheight 391
+}
+BackdropNode {
+ inputs 0
+ name MRD_for_3D_MRF_46_to_50_Lamdak_100
+ tile_color 0xb6f88ff
+ note_font_color 0x70a667ff
+ xpos -1767
+ ypos 742
+ bdwidth 426
+ bdheight 391
+}
+BackdropNode {
+ inputs 0
+ name MRD_for_3D_MRF_46_to_50_Lamdak_1000
+ tile_color 0xb6f88ff
+ note_font_color 0x70a667ff
+ xpos -1767
+ ypos 1172
+ bdwidth 426
+ bdheight 391
+}
+BackdropNode {
+ inputs 0
+ name MRF_More_Neighbours
+ tile_color 0x7171c600
+ note_font_size 42
+ xpos -604
+ ypos -1
+ bdwidth 512
+ bdheight 402
+}
+BackdropNode {
+ inputs 0
+ name Motion_Compensation
+ tile_color 0xb6f88ff
+ note_font_color 0x70a667ff
+ xpos -640
+ ypos -1035
+ bdwidth 777
+ bdheight 452
+}
+Write {
+ inputs 0
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hulamrf.##.png
+ file_type png
+ checkHashOnRead false
+ version 1
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Write4
+ xpos -1892
+ ypos 254
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hulamrf.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ name Read9
+ xpos -1689
+ ypos -71
+}
+set N26b03400 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset5
+ xpos -1706
+ ypos 169
+}
+set N26b16b00 [stack 0]
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read10
+ xpos -1526
+ ypos -70
+}
+set N26b02c00 [stack 0]
+push $N26b16b00
+push $N26b02c00
+push $N26b16b00
+push $N26b02c00
+push $N26b03400
+BlinkScript {
+ inputs 3
+ recompileCount 12
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d56d5237e00f641fb7ddf76e4b76ded5fc8ced4aadc13a0599af76237b0bdf9b 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D5
+ xpos -1589
+ ypos 86
+}
+BlinkScript {
+ inputs 3
+ recompileCount 12
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d56d5237e00f641fb7ddf76e4b76ded5fc8ced4aadc13a0599af76237b0bdf9b 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D6
+ xpos -1458
+ ypos 94
+}
+BlinkScript {
+ inputs 3
+ recompileCount 12
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d56d5237e00f641fb7ddf76e4b76ded5fc8ced4aadc13a0599af76237b0bdf9b 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D8
+ xpos -1526
+ ypos 182
+}
+Write {
+ inputs 0
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hulamrf.##.png
+ file_type png
+ checkHashOnRead false
+ version 1
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Write6
+ xpos -1608
+ ypos 674
+}
+Write {
+ inputs 0
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hulamrf.##.png
+ file_type png
+ checkHashOnRead false
+ version 1
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Write7
+ xpos -1625
+ ypos 1090
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read15
+ xpos -1718
+ ypos 797
+}
+set N26a49000 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset8
+ xpos -1727
+ ypos 1011
+}
+set N26a4c100 [stack 0]
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read16
+ xpos -1536
+ ypos 767
+}
+set N26a48800 [stack 0]
+push $N26a4c100
+push $N26a48800
+push $N26a4c100
+push $N26a48800
+push $N26a49000
+BlinkScript {
+ inputs 3
+ recompileCount 16
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise b54238d4ff376d7eb7b9df578ab771b9fccd3d04cab3089fd44625a1f9eeef66 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*100.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*100.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D16
+ xpos -1602
+ ypos 926
+}
+BlinkScript {
+ inputs 3
+ recompileCount 17
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise b54238d4ff376d7eb7b9df578ab771b9fccd3d04cab3089fd44625a1f9eeef66 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*100.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*100.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D17
+ xpos -1479
+ ypos 936
+}
+BlinkScript {
+ inputs 3
+ recompileCount 16
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise b54238d4ff376d7eb7b9df578ab771b9fccd3d04cab3089fd44625a1f9eeef66 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*100.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*100.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D18
+ xpos -1544
+ ypos 1024
+}
+Write {
+ inputs 0
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hulamrf.##.png
+ file_type png
+ checkHashOnRead false
+ version 1
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Write8
+ xpos -1625
+ ypos 1520
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read17
+ xpos -1718
+ ypos 1227
+}
+set N269d6800 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset9
+ xpos -1727
+ ypos 1441
+}
+set N269dd600 [stack 0]
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read18
+ xpos -1536
+ ypos 1197
+}
+set N269d6000 [stack 0]
+push $N269dd600
+push $N269d6000
+push $N269dd600
+push $N269d6000
+push $N269d6800
+BlinkScript {
+ inputs 3
+ recompileCount 17
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise f9348a55857386c90365c2d3e5873da5d5706689540c258a635aa28f62833377 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*1000.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*1000.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D19
+ xpos -1603
+ ypos 1356
+}
+BlinkScript {
+ inputs 3
+ recompileCount 18
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise f9348a55857386c90365c2d3e5873da5d5706689540c258a635aa28f62833377 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*1000.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*1000.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D20
+ xpos -1480
+ ypos 1365
+}
+BlinkScript {
+ inputs 3
+ recompileCount 17
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise f9348a55857386c90365c2d3e5873da5d5706689540c258a635aa28f62833377 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*1000.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*1000.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D21
+ xpos -1544
+ ypos 1454
+}
+Read {
+ inputs 0
+ file_type tiff
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.#####.tiff
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ version 6
+ name Read1
+ xpos -660
+ ypos -487
+}
+set N29831400 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset2
+ xpos -660
+ ypos -309
+}
+push $N29831400
+VectorGenerator {
+ Advanced 1
+ name VectorGenerator2
+ xpos -488
+ ypos -463
+}
+set N29830c00 [stack 0]
+ShuffleCopy {
+ inputs 2
+ in2 motion
+ red red
+ green green
+ blue blue
+ black blue2
+ white alpha2
+ out2 backward
+ name ShuffleCopy2
+ xpos -488
+ ypos -309
+}
+IDistort {
+ uv backward
+ filter Simon
+ name IDistort2
+ xpos -359
+ ypos -315
+}
+Read {
+ inputs 0
+ file_type tiff
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.#####.tiff
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read19
+ xpos -473
+ ypos -1008
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read2
+ xpos -1713
+ ypos -479
+}
+set N29950400 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset3
+ xpos -1713
+ ypos -252
+}
+set N6b34e400 [stack 0]
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read6
+ xpos -1522
+ ypos -496
+}
+set N29833800 [stack 0]
+push $N6b34e400
+push $N29833800
+push $N6b34e400
+push $N29833800
+push $N29950400
+BlinkScript {
+ inputs 3
+ recompileCount 15
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise a549f4838ae4ac3dfb8aafc887d583ef94cebf77344e06a3dd9becc1dbef2c23 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*5.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*5.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D11
+ xpos -1589
+ ypos -337
+}
+BlinkScript {
+ inputs 3
+ recompileCount 14
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise a549f4838ae4ac3dfb8aafc887d583ef94cebf77344e06a3dd9becc1dbef2c23 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*5.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*5.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D2
+ xpos -1465
+ ypos -327
+}
+BlinkScript {
+ inputs 3
+ recompileCount 13
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise bf9235d63e03d8272328b8cfacf181f173d4feaedf8e14b79bfd8e8c272c4a1e 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ ((1-pre_pex)*3.0f);\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D3
+ xpos -1533
+ ypos -238
+}
+Write {
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hulamrf.##.png
+ file_type png
+ checkHashOnRead false
+ version 1
+ name Write3
+ xpos -1533
+ ypos -163
+}
+Write {
+ inputs 0
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaLL.##.png
+ file_type png
+ checkHashOnRead false
+ version 2
+ name Likelyhood_Write
+ xpos -2303
+ ypos -220
+}
+Read {
+ inputs 0
+ file_type tiff
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.#####.tiff
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read3
+ xpos -2229
+ ypos -495
+}
+Expression {
+ expr0 (r-0.3127)*(r-0.3127)/0.00193
+ expr1 (g-0.6276)*(g-0.6276)/0.00021
+ expr2 "(b - 0.5150) * (b - 0.5150)/0.000251"
+ name Likelyhood
+ xpos -2229
+ ypos -399
+}
+Expression {
+ expr0 r+g+b
+ expr1 r+g+b
+ expr2 r+g+b
+ name summing
+ xpos -2229
+ ypos -365
+}
+set N6b1e1400 [stack 0]
+Dot {
+ name Dot11
+ xpos -2096
+ ypos -459
+}
+set N6b1e0800 [stack 0]
+push $N6b1e0800
+push $N6b1e0800
+push $N6b1e1400
+Expression {
+ expr0 step(60,r)
+ expr1 step(60,g)
+ expr2 step(60,b)
+ name threshold3
+ xpos -2229
+ ypos -313
+}
+BlinkScript {
+ inputs 2
+ recompileCount 5
+ ProgramGroup 1
+ KernelDescription "2 \"MRF4\" iterate componentWise b539ca9aa42ddab5ec822eab711b3d3fa4f547147345fe5fb195593d5207d9c1 3 \"src\" Read Random \"i_Energy\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF4 : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    \n\n    // Calculate spatial engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos);\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ MRF4_lamda 5
+ rebuild_finalise ""
+ name MRF2D1
+ xpos -2016
+ ypos -468
+}
+BlinkScript {
+ inputs 2
+ recompileCount 5
+ ProgramGroup 1
+ KernelDescription "2 \"MRF4\" iterate componentWise b539ca9aa42ddab5ec822eab711b3d3fa4f547147345fe5fb195593d5207d9c1 3 \"src\" Read Random \"i_Energy\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF4 : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    \n\n    // Calculate spatial engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos);\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ MRF4_lamda 5
+ rebuild_finalise ""
+ name MRF2D2
+ xpos -1999
+ ypos -380
+}
+set N21733800 [stack 0]
+BlinkScript {
+ inputs 2
+ recompileCount 5
+ ProgramGroup 1
+ KernelDescription "2 \"MRF4\" iterate componentWise b539ca9aa42ddab5ec822eab711b3d3fa4f547147345fe5fb195593d5207d9c1 3 \"src\" Read Random \"i_Energy\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF4 : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    \n\n    // Calculate spatial engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos);\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ MRF4_lamda 5
+ rebuild_finalise ""
+ name MRF2D3
+ xpos -1984
+ ypos -270
+}
+Write {
+ inputs 0
+ file "C:/Users/Darshan/Desktop/Gaming/Motion Compensation - AM/Hula_48_mc.tiff"
+ colorspace linear
+ file_type tiff
+ checkHashOnRead false
+ version 12
+ name Write15
+ xpos -202
+ ypos -294
+}
+push $N29830c00
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 motion
+ fromInput2 {{0} B}
+ mappings "4 forward.u 0 0 rgba.red 0 0 forward.v 0 1 rgba.green 0 1 backward.u 0 2 rgba.blue 0 2 backward.v 0 3 rgba.alpha 0 3"
+ name Shuffle
+ xpos -112
+ ypos -457
+}
+push $N29830c00
+Shuffle {
+ in motion
+ name Shuffle1
+ xpos -203
+ ypos -422
+}
+Read {
+ inputs 0
+ file_type tiff
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula2D.##.tiff
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ name Read33
+ xpos -628
+ ypos -948
+}
+set N5299c800 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset10
+ xpos -607
+ ypos -734
+}
+push $N5299c800
+VectorGenerator {
+ Advanced 1
+ name VectorGenerator3
+ xpos -506
+ ypos -830
+}
+ShuffleCopy {
+ inputs 2
+ in2 motion
+ red red
+ green green
+ blue blue
+ black blue2
+ white alpha2
+ out2 backward
+ name ShuffleCopy3
+ xpos -471
+ ypos -734
+}
+IDistort {
+ uv backward
+ filter Simon
+ name IDistort3
+ xpos -271
+ ypos -728
+}
+set N6b2e6800 [stack 0]
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read5
+ xpos -330
+ ypos -1010
+}
+set N6b2e6400 [stack 0]
+Dot {
+ name Dot13
+ xpos -20
+ ypos -971
+}
+push $N6b2e6800
+push $N6b2e6400
+Dot {
+ name Dot12
+ xpos -166
+ ypos -971
+}
+push $N6b2e6800
+push $N6b2e6400
+push $N5299c800
+BlinkScript {
+ inputs 3
+ recompileCount 17
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d56d5237e00f641fb7ddf76e4b76ded5fc8ced4aadc13a0599af76237b0bdf9b 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D22
+ xpos -340
+ ypos -852
+}
+set N6b2e5400 [stack 0]
+BlinkScript {
+ inputs 3
+ recompileCount 19
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d56d5237e00f641fb7ddf76e4b76ded5fc8ced4aadc13a0599af76237b0bdf9b 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D23
+ xpos -200
+ ypos -862
+}
+BlinkScript {
+ inputs 3
+ recompileCount 17
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise e83912995a5c6ddd57705bc6d32f1a4f952fbedac4da588fde0ce9028225f0fa 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*2.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*2.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D24
+ xpos -54
+ ypos -862
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read11
+ xpos -2064
+ ypos -824
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read4
+ xpos -1735
+ ypos -901
+}
+set N6b2e7800 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset6
+ xpos -1725
+ ypos -695
+}
+set N26ab9600 [stack 0]
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read12
+ xpos -1591
+ ypos -936
+}
+set N26aa9400 [stack 0]
+push $N26ab9600
+push $N26aa9400
+push $N26ab9600
+push $N26aa9400
+push $N6b2e7800
+BlinkScript {
+ inputs 3
+ recompileCount 14
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise e83912995a5c6ddd57705bc6d32f1a4f952fbedac4da588fde0ce9028225f0fa 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKer1nel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*2.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*2.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D9
+ xpos -1660
+ ypos -790
+}
+set N26aa8c00 [stack 0]
+BlinkScript {
+ inputs 3
+ recompileCount 15
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise e83912995a5c6ddd57705bc6d32f1a4f952fbedac4da588fde0ce9028225f0fa 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*2.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*2.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D10
+ xpos -1444
+ ypos -825
+}
+set N26aa8800 [stack 0]
+BlinkScript {
+ inputs 3
+ recompileCount 14
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise e83912995a5c6ddd57705bc6d32f1a4f952fbedac4da588fde0ce9028225f0fa 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*2.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*2.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D12
+ xpos -1430
+ ypos -716
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read13
+ selected true
+ xpos -1710
+ ypos 356
+}
+set N26a4b400 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset7
+ xpos -1710
+ ypos 595
+}
+set N26a4eb00 [stack 0]
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read14
+ xpos -1519
+ ypos 351
+}
+set N26a4ac00 [stack 0]
+push $N26a4eb00
+push $N26a4ac00
+push $N26a4eb00
+push $N26a4ac00
+push $N26a4b400
+BlinkScript {
+ inputs 3
+ recompileCount 15
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d96d5779dac8ceb77bddf8561ac626cd477f123460b5a1b44fe64e75753e0090 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*10.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*10.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D13
+ xpos -1585
+ ypos 510
+}
+BlinkScript {
+ inputs 3
+ recompileCount 16
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d96d5779dac8ceb77bddf8561ac626cd477f123460b5a1b44fe64e75753e0090 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*10.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*10.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D14
+ xpos -1462
+ ypos 520
+}
+BlinkScript {
+ inputs 3
+ recompileCount 15
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise d96d5779dac8ceb77bddf8561ac626cd477f123460b5a1b44fe64e75753e0090 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex = prev_frame(pos.x,pos.y);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+pre_pex*10.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-pre_pex)*10.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D15
+ xpos -1528
+ ypos 608
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read7
+ xpos -587
+ ypos 37
+}
+set N26b01800 [stack 0]
+TimeOffset {
+ time_offset 1
+ time ""
+ name TimeOffset4
+ xpos -550
+ ypos 266
+}
+set N26b14100 [stack 0]
+Dot {
+ name Dot7
+ xpos -417
+ ypos 268
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/HulaL.##.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 46
+ last 50
+ origfirst 46
+ origlast 50
+ origset true
+ colorspace linear
+ name Read8
+ xpos -369
+ ypos 16
+}
+set N26b00c00 [stack 0]
+push $N26b14100
+Dot {
+ name Dot6
+ xpos -417
+ ypos 228
+}
+push $N26b00c00
+Dot {
+ name Dot1
+ xpos -232
+ ypos 63
+}
+push $N26b14100
+Dot {
+ name Dot5
+ xpos -446
+ ypos 226
+}
+push $N26b00c00
+Dot {
+ name Dot3
+ xpos -443
+ ypos 75
+}
+Dot {
+ name Dot4
+ xpos -412
+ ypos 115
+}
+push $N26b01800
+BlinkScript {
+ inputs 3
+ recompileCount 18
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise 5e5beda4435667d76c1fa78563534e715ddd6ea68d27e5228b8fafa58dcc7f62 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex_r = prev_frame(pos.x+1,pos.y);\n    float pre_pex_l = prev_frame(pos.x-1,pos.y);\n    float pre_pex_u = prev_frame(pos.x,pos.y-1);\n    float pre_pex_d = prev_frame(pos.x,pos.y+1);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d)*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d))*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D1
+ xpos -462
+ ypos 161
+}
+BlinkScript {
+ inputs 3
+ recompileCount 17
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise 5e5beda4435667d76c1fa78563534e715ddd6ea68d27e5228b8fafa58dcc7f62 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex_r = prev_frame(pos.x+1,pos.y);\n    float pre_pex_l = prev_frame(pos.x-1,pos.y);\n    float pre_pex_u = prev_frame(pos.x,pos.y-1);\n    float pre_pex_d = prev_frame(pos.x,pos.y+1);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d)*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d))*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D4
+ xpos -266
+ ypos 171
+}
+BlinkScript {
+ inputs 3
+ recompileCount 17
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise 5e5beda4435667d76c1fa78563534e715ddd6ea68d27e5228b8fafa58dcc7f62 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex_r = prev_frame(pos.x+1,pos.y);\n    float pre_pex_l = prev_frame(pos.x-1,pos.y);\n    float pre_pex_u = prev_frame(pos.x,pos.y-1);\n    float pre_pex_d = prev_frame(pos.x,pos.y+1);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d)*3.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d))*3.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D7
+ xpos -369
+ ypos 287
+}
+push $N21733800
+Viewer {
+ frame 49
+ frame_range 46-50
+ name Viewer4
+ xpos -1877
+ ypos -233
+}
+push $N21733800
+Write {
+ file C:/Users/Darshan/Desktop/Gaming/Nuke/Hula2DL.##.tiff
+ colorspace linear
+ file_type tiff
+ checkHashOnRead false
+ version 5
+ name Write2
+ xpos -2086
+ ypos -227
+}
+push $N26aa8800
+Write {
+ file "C:/Users/Darshan/Desktop/Data from NUke/weight 2/Hula3dnmc##.png"
+ file_type png
+ checkHashOnRead false
+ version 2
+ name Write5
+ xpos -1725
+ ypos -623
+}
+push $N6b2e6800
+push $N6b2e6400
+push $N6b2e6800
+push $N6b2e6400
+push $N5299c800
+BlinkScript {
+ inputs 3
+ recompileCount 19
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise f97b33b47962e5189ac58052fb680da1d6a0cdc717163379a9f1f722debf921f 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex_r = prev_frame(pos.x+1,pos.y);\n    float pre_pex_l = prev_frame(pos.x-1,pos.y);\n    float pre_pex_u = prev_frame(pos.x,pos.y-1);\n    float pre_pex_d = prev_frame(pos.x,pos.y+1);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d)*2.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d))*2.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D43
+ xpos -499
+ ypos -648
+}
+BlinkScript {
+ inputs 3
+ recompileCount 19
+ ProgramGroup 1
+ KernelDescription "2 \"MRF3d\" iterate componentWise f97b33b47962e5189ac58052fb680da1d6a0cdc717163379a9f1f722debf921f 4 \"src\" Read Random \"i_Energy\" Read Random \"prev_frame\" Read Random \"dst\" Write Point 1 \"lamda\" Float 1 ZmamQA== 1 \"lamda\" 1 1 1 \"alpha\" Float 1 1 AAAAAA=="
+ kernelSource "\nkernel MRF3d : ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> i_Energy; // the input image\nImage<eRead, eAccessRandom, eEdgeClamped> prev_frame; \n  Image<eWrite> dst; // the output image\n\n  param:\n    float lamda; \n\n  local:\n    float alpha; \n\n  void define() \{\n    defineParam(lamda, \"lamda\", 5.2f);\n  \}\n\n  // The init() function is run before any calls to process().\n  // Local variables can be initialized here.\n  void init() \{\n    alpha =25.0;\n  \}\n\n  void process(int2 pos) \{\n    float left_pos = src(pos.x-1,pos.y);\n    float right_pos = src(pos.x+1,pos.y);\n    float top_pos = src(pos.x,pos.y-1);\n    float bottom_pos = src(pos.x,pos.y+1);\n    float pre_pex_r = prev_frame(pos.x+1,pos.y);\n    float pre_pex_l = prev_frame(pos.x-1,pos.y);\n    float pre_pex_u = prev_frame(pos.x,pos.y-1);\n    float pre_pex_d = prev_frame(pos.x,pos.y+1);\n    \n\n    // Calculate temporal engery\n    float e_sp_0 = left_pos+right_pos+top_pos+bottom_pos+(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d)*2.0f;\n\n    float e_sp_1 = (1-left_pos) + (1-right_pos) + (1-top_pos) + (1-bottom_pos)+ (1-(pre_pex_r+pre_pex_l+pre_pex_u+pre_pex_d))*2.0f;\n\n    float e_0 = i_Energy(pos.x,pos.y)+e_sp_0*lamda;\n    \n    float e_1 = alpha + e_sp_1 * lamda;\n    \n    if (e_0 < e_1)\n      dst() = 0;\n    else \n      dst() = 1;\n\n\}\n \n\};\n"
+ rebuild ""
+ rebuild_finalise ""
+ name MRF3D44
+ xpos -317
+ ypos -648
+}
+push $N6b2e5400
+Write {
+ file "C:/Users/Darshan/Desktop/Data from NUke/weight 2/Hulamc1##.png"
+ file_type png
+ checkHashOnRead false
+ version 11
+ name Write17
+ xpos -101
+ ypos -680
+}
+push $N26aa8800
+push $N26aa8c00
+push 0
+Viewer {
+ inputs 3
+ frame 49
+ frame_range 46-50
+ input_number 2
+ name Viewer1
+ xpos -1603
+ ypos -630
+}
